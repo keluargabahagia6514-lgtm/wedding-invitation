@@ -1,27 +1,22 @@
 /* ========================================
-   WEDDING INVITATION - APP LOGIC
-   Envitto Style Version
+   WEDDING INVITATION - 3D PREMIUM APP
+   Three.js + Vanilla Tilt + Swiper
    ======================================== */
 
 (function() {
   'use strict';
 
-  // ===== CONFIGURATION =====
   const CONFIG = {
     weddingDate: new Date('2026-12-28T08:00:00+07:00'),
     musicUrl: 'assets/music/background.mp3',
-    musicFallback: 'assets/music/background.wav',
-    guestName: 'Tamu Undangan'
+    musicFallback: 'assets/music/background.wav'
   };
 
-  // ===== STATE =====
   let audio = null;
   let isPlaying = false;
-  let loveSwiper = null;
-  let gallerySwiper = null;
 
-  // ===== INIT =====
   document.addEventListener('DOMContentLoaded', () => {
+    init3DBackground();
     initCover();
     initParticles();
     initCountdown();
@@ -29,11 +24,158 @@
     initLoveStory();
     initGallery();
     initWishes();
+    initTilt();
     initScrollAnimations();
     initScrollToTop();
     initCopyButtons();
     initSaveDate();
   });
+
+  // ===== THREE.JS 3D BACKGROUND =====
+  function init3DBackground() {
+    const canvas = document.getElementById('canvas-3d');
+    if (!canvas || typeof THREE === 'undefined') return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
+
+    // Create floating rings
+    const rings = [];
+    const ringGeo = new THREE.TorusGeometry(1, 0.02, 16, 100);
+    const ringMat = new THREE.MeshBasicMaterial({ 
+      color: 0xD2B473, 
+      transparent: true, 
+      opacity: 0.15 
+    });
+
+    for (let i = 0; i < 5; i++) {
+      const ring = new THREE.Mesh(ringGeo, ringMat.clone());
+      ring.position.set(
+        (Math.random() - 0.5) * 10,
+        (Math.random() - 0.5) * 10,
+        (Math.random() - 0.5) * 5
+      );
+      ring.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+      ring.userData = {
+        rotSpeed: { x: (Math.random() - 0.5) * 0.01, y: (Math.random() - 0.5) * 0.01 },
+        floatSpeed: 0.5 + Math.random() * 0.5,
+        floatAmp: 0.3 + Math.random() * 0.3
+      };
+      scene.add(ring);
+      rings.push(ring);
+    }
+
+    // Create particles
+    const particleCount = 100;
+    const particleGeo = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+
+    for (let i = 0; i < particleCount; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 20;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+      
+      // Gold color
+      colors[i * 3] = 0.824; // R
+      colors[i * 3 + 1] = 0.706; // G
+      colors[i * 3 + 2] = 0.451; // B
+    }
+
+    particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const particleMat = new THREE.PointsMaterial({
+      size: 0.05,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.6,
+      blending: THREE.AdditiveBlending
+    });
+
+    const particles = new THREE.Points(particleGeo, particleMat);
+    scene.add(particles);
+
+    // Create floating diamonds
+    const diamonds = [];
+    const diamondGeo = new THREE.OctahedronGeometry(0.15, 0);
+    const diamondMat = new THREE.MeshBasicMaterial({ 
+      color: 0xD2B473, 
+      transparent: true, 
+      opacity: 0.2,
+      wireframe: true
+    });
+
+    for (let i = 0; i < 8; i++) {
+      const diamond = new THREE.Mesh(diamondGeo, diamondMat.clone());
+      diamond.position.set(
+        (Math.random() - 0.5) * 12,
+        (Math.random() - 0.5) * 12,
+        (Math.random() - 0.5) * 6
+      );
+      diamond.userData = {
+        rotSpeed: { x: (Math.random() - 0.5) * 0.02, y: (Math.random() - 0.5) * 0.02 },
+        floatSpeed: 0.3 + Math.random() * 0.4,
+        floatAmp: 0.2 + Math.random() * 0.3
+      };
+      scene.add(diamond);
+      diamonds.push(diamond);
+    }
+
+    // Mouse tracking
+    let mouseX = 0, mouseY = 0;
+    document.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    // Animation loop
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const time = Date.now() * 0.001;
+
+      // Rotate rings
+      rings.forEach(ring => {
+        ring.rotation.x += ring.userData.rotSpeed.x;
+        ring.rotation.y += ring.userData.rotSpeed.y;
+        ring.position.y += Math.sin(time * ring.userData.floatSpeed) * 0.002;
+      });
+
+      // Rotate diamonds
+      diamonds.forEach(diamond => {
+        diamond.rotation.x += diamond.userData.rotSpeed.x;
+        diamond.rotation.y += diamond.userData.rotSpeed.y;
+        diamond.position.y += Math.sin(time * diamond.userData.floatSpeed) * 0.003;
+      });
+
+      // Rotate particles
+      particles.rotation.y += 0.0003;
+      particles.rotation.x += 0.0001;
+
+      // Camera follows mouse slightly
+      camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.05;
+      camera.position.y += (-mouseY * 0.5 - camera.position.y) * 0.05;
+      camera.lookAt(scene.position);
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // Resize handler
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  }
 
   // ===== COVER PAGE =====
   function initCover() {
@@ -41,49 +183,43 @@
     const mainContent = document.getElementById('main-content');
     const cover = document.getElementById('cover');
 
-    // Get guest name from URL
     const urlParams = new URLSearchParams(window.location.search);
     const guestName = urlParams.get('to');
     if (guestName) {
       document.getElementById('guest-name').textContent = guestName;
-      CONFIG.guestName = guestName;
     }
 
-    // Prevent scroll on cover
     document.body.style.overflow = 'hidden';
 
     btnOpen.addEventListener('click', () => {
       cover.classList.add('fade-out');
-      
       setTimeout(() => {
         cover.style.display = 'none';
         mainContent.classList.remove('hidden');
         document.body.style.overflow = 'auto';
-
-        // Start music
         setTimeout(() => playMusic(), 500);
-
-        // Trigger scroll animations
         triggerScrollAnimations();
-      }, 800);
+      }, 1000);
     });
   }
 
-  // ===== FLOATING PARTICLES =====
+  // ===== PARTICLES =====
   function initParticles() {
-    const container = document.getElementById('cover-particles');
-    if (!container) return;
-
-    for (let i = 0; i < 20; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      particle.style.left = Math.random() * 100 + '%';
-      particle.style.animationDuration = (10 + Math.random() * 15) + 's';
-      particle.style.animationDelay = Math.random() * 10 + 's';
-      particle.style.width = (2 + Math.random() * 4) + 'px';
-      particle.style.height = particle.style.width;
-      container.appendChild(particle);
-    }
+    const containers = document.querySelectorAll('.cover-particles, .section-particles');
+    containers.forEach(container => {
+      const count = container.classList.contains('cover-particles') ? 25 : 10;
+      for (let i = 0; i < count; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDuration = (10 + Math.random() * 15) + 's';
+        particle.style.animationDelay = Math.random() * 10 + 's';
+        const size = 2 + Math.random() * 4;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        container.appendChild(particle);
+      }
+    });
   }
 
   // ===== COUNTDOWN =====
@@ -96,31 +232,32 @@
     function update() {
       const now = new Date();
       const diff = CONFIG.weddingDate - now;
+      if (diff <= 0) return;
 
-      if (diff <= 0) {
-        elDays.textContent = '0';
-        elHours.textContent = '0';
-        elMinutes.textContent = '0';
-        elSeconds.textContent = '0';
-        return;
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+
+      animateNum(elDays, d);
+      animateNum(elHours, h);
+      animateNum(elMinutes, m);
+      animateNum(elSeconds, s);
+
+      // Update progress ring
+      const progress = document.querySelector('.countdown-progress');
+      if (progress) {
+        const totalDays = (CONFIG.weddingDate - new Date('2026-01-01')) / 86400000;
+        const elapsed = totalDays - d;
+        const percent = elapsed / totalDays;
+        progress.style.strokeDashoffset = 565 * (1 - percent);
       }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-      animateNumber(elDays, days);
-      animateNumber(elHours, hours);
-      animateNumber(elMinutes, minutes);
-      animateNumber(elSeconds, seconds);
     }
 
-    function animateNumber(el, value) {
-      const current = parseInt(el.textContent) || 0;
-      if (current !== value) {
-        el.style.transform = 'scale(1.1)';
-        el.textContent = value;
+    function animateNum(el, val) {
+      if (parseInt(el.textContent) !== val) {
+        el.style.transform = 'scale(1.15)';
+        el.textContent = val;
         setTimeout(() => el.style.transform = 'scale(1)', 200);
       }
     }
@@ -133,18 +270,9 @@
   function initSaveDate() {
     const btn = document.getElementById('btn-save-date');
     if (!btn) return;
-
     btn.addEventListener('click', () => {
-      // Create calendar event
-      const title = 'Pernikahan Putri & Andika';
-      const start = '20261228T010000Z';
-      const end = '20261228T070000Z';
-      const details = 'Akad Nikah & Resepsi - Masjid Al-Ikhlas, Jakarta Selatan';
-      const location = 'Masjid Al-Ikhlas, Jl. Merdeka No. 123, Jakarta Selatan';
-
-      const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${start}/${end}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`;
-      
-      window.open(googleUrl, '_blank');
+      const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('Pernikahan Putri & Andika')}&dates=20261228T010000Z/20261228T070000Z&details=${encodeURIComponent('Akad Nikah & Resepsi')}&location=${encodeURIComponent('Masjid Al-Ikhlas, Jakarta')}`;
+      window.open(url, '_blank');
       showToast('Mengarahkan ke Google Calendar... 📅');
     });
   }
@@ -155,39 +283,18 @@
     audio = new Audio();
     audio.loop = true;
     audio.volume = 0.5;
-    audio.preload = 'auto';
-
-    function tryLoad(url) {
-      audio.src = url;
-      audio.load();
-    }
 
     audio.addEventListener('error', () => {
-      if (audio.src.includes('.mp3')) {
-        tryLoad(CONFIG.musicFallback);
-      }
+      if (audio.src.includes('.mp3')) audio.src = CONFIG.musicFallback;
     });
 
-    tryLoad(CONFIG.musicUrl);
-
-    btn.addEventListener('click', () => {
-      if (isPlaying) {
-        pauseMusic();
-      } else {
-        playMusic();
-      }
-    });
+    audio.src = CONFIG.musicUrl;
+    btn.addEventListener('click', () => isPlaying ? pauseMusic() : playMusic());
   }
 
   function playMusic() {
     if (!audio) return;
-    audio.play().then(() => {
-      isPlaying = true;
-      updateMusicUI();
-    }).catch(() => {
-      isPlaying = false;
-      updateMusicUI();
-    });
+    audio.play().then(() => { isPlaying = true; updateMusicUI(); }).catch(() => {});
   }
 
   function pauseMusic() {
@@ -198,177 +305,123 @@
   }
 
   function updateMusicUI() {
-    const btn = document.getElementById('music-control');
-    btn.classList.toggle('playing', isPlaying);
+    document.getElementById('music-control').classList.toggle('playing', isPlaying);
   }
 
-  // ===== LOVE STORY SWIPER =====
+  // ===== LOVE STORY =====
   function initLoveStory() {
-    loveSwiper = new Swiper('.love-swiper', {
+    new Swiper('.love-swiper', {
       loop: true,
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: false
-      },
-      pagination: {
-        el: '.love-swiper .swiper-pagination',
-        clickable: true
-      },
+      autoplay: { delay: 5000, disableOnInteraction: false },
+      pagination: { el: '.love-swiper .swiper-pagination', clickable: true },
       effect: 'fade',
-      fadeEffect: {
-        crossFade: true
-      },
+      fadeEffect: { crossFade: true },
       grabCursor: true
     });
   }
 
-  // ===== GALLERY SWIPER =====
+  // ===== GALLERY =====
   function initGallery() {
-    gallerySwiper = new Swiper('.gallery-swiper', {
+    new Swiper('.gallery-swiper', {
       loop: true,
-      autoplay: {
-        delay: 4000,
-        disableOnInteraction: false
-      },
-      pagination: {
-        el: '.gallery-swiper .swiper-pagination',
-        clickable: true
-      },
-      navigation: {
-        nextEl: '.gallery-swiper .swiper-button-next',
-        prevEl: '.gallery-swiper .swiper-button-prev'
-      },
+      autoplay: { delay: 4000, disableOnInteraction: false },
+      pagination: { el: '.gallery-swiper .swiper-pagination', clickable: true },
+      navigation: { nextEl: '.gallery-swiper .swiper-button-next', prevEl: '.gallery-swiper .swiper-button-prev' },
       effect: 'coverflow',
-      coverflowEffect: {
-        rotate: 0,
-        stretch: 0,
-        depth: 100,
-        modifier: 1,
-        slideShadows: false
-      },
+      coverflowEffect: { rotate: 0, stretch: 0, depth: 100, modifier: 1, slideShadows: false },
       grabCursor: true,
       centeredSlides: true,
-      slidesPerView: 1,
-      spaceBetween: 0
+      slidesPerView: 1
     });
   }
 
-  // ===== WISHES / GUESTBOOK =====
+  // ===== TILT EFFECT =====
+  function initTilt() {
+    if (typeof VanillaTilt !== 'undefined') {
+      VanillaTilt.init(document.querySelectorAll('[data-tilt]'), {
+        max: 10,
+        speed: 400,
+        glare: true,
+        'max-glare': 0.2
+      });
+    }
+  }
+
+  // ===== WISHES =====
   function initWishes() {
     const form = document.getElementById('form-wishes');
-    const list = document.getElementById('wishes-list');
-
-    // Load existing wishes
     loadWishes();
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-
       const name = document.getElementById('wish-name').value.trim();
       const attendance = document.getElementById('wish-attendance').value;
       const message = document.getElementById('wish-message').value.trim();
-
       if (!name || !attendance || !message) return;
 
-      const entry = {
-        name,
-        attendance,
-        message,
-        time: new Date().toLocaleString('id-ID')
-      };
-
-      // Save to localStorage
+      const entry = { name, attendance, message };
       const entries = JSON.parse(localStorage.getItem('wedding_wishes') || '[]');
       entries.unshift(entry);
       localStorage.setItem('wedding_wishes', JSON.stringify(entries));
-
-      // Add to DOM
       addWishCard(entry, true);
-
-      // Reset form
       form.reset();
-
-      // Show toast
       showToast('Ucapan berhasil dikirim! 💌');
     });
   }
 
   function loadWishes() {
     const entries = JSON.parse(localStorage.getItem('wedding_wishes') || '[]');
-    
     if (entries.length === 0) {
-      // Show sample wishes
-      const samples = [
+      [
         { name: 'Budi Santoso', attendance: 'hadir', message: 'Selamat ya Putri & Andika! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. Aamiin 🤲' },
-        { name: 'Rina Wati', attendance: 'hadir', message: 'Barakallahu lakuma wa baraka alaikuma. Semoga langgeng sampai Jannah! 💕' },
-        { name: 'Dewi Lestari', attendance: 'ragu', message: 'Selamat menempuh hidup baru! Semoga selalu bahagia. Aku usahakan hadir ya 🙏' }
-      ];
-      samples.forEach(s => addWishCard(s, false));
+        { name: 'Rina Wati', attendance: 'hadir', message: 'Barakallahu lakuma. Semoga langgeng sampai Jannah! 💕' },
+        { name: 'Dewi Lestari', attendance: 'ragu', message: 'Selamat menempuh hidup baru! Aku usahakan hadir ya 🙏' }
+      ].forEach(s => addWishCard(s, false));
     } else {
-      entries.forEach(entry => addWishCard(entry, false));
+      entries.forEach(e => addWishCard(e, false));
     }
   }
 
   function addWishCard(entry, isNew) {
     const list = document.getElementById('wishes-list');
-    const badgeLabels = {
-      hadir: 'Hadir ✅',
-      tidak: 'Tidak Hadir ❌',
-      ragu: 'Ragu 🤔'
-    };
-
+    const badges = { hadir: 'Hadir ✅', tidak: 'Tidak ❌', ragu: 'Ragu 🤔' };
     const card = document.createElement('div');
     card.className = 'wish-card';
     card.innerHTML = `
       <div class="wish-header">
-        <span class="wish-name">${escapeHtml(entry.name)}</span>
-        <span class="wish-badge ${entry.attendance}">${badgeLabels[entry.attendance] || ''}</span>
+        <span class="wish-name">${esc(entry.name)}</span>
+        <span class="wish-badge ${entry.attendance}">${badges[entry.attendance] || ''}</span>
       </div>
-      <p class="wish-message">${escapeHtml(entry.message)}</p>
+      <p class="wish-message">${esc(entry.message)}</p>
     `;
-
-    if (isNew) {
-      list.insertBefore(card, list.firstChild);
-    } else {
-      list.appendChild(card);
-    }
+    isNew ? list.insertBefore(card, list.firstChild) : list.appendChild(card);
   }
 
-  function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-  }
+  function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
   // ===== SCROLL ANIMATIONS =====
   function initScrollAnimations() {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
         }
       });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    // Observe elements
-    document.querySelectorAll('.section-header, .profile-card, .event-card, .dresscode-card, .love-card, .gift-card, .wish-card').forEach(el => {
+    document.querySelectorAll('.section-header, .glass-card, .profile-card, .event-card, .dresscode-card, .love-card, .gift-card, .wish-card').forEach(el => {
       el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(el);
+      el.style.transform = 'translateY(40px)';
+      el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      obs.observe(el);
     });
   }
 
   function triggerScrollAnimations() {
     setTimeout(() => {
-      document.querySelectorAll('.section-header, .profile-card, .event-card, .dresscode-card').forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight) {
+      document.querySelectorAll('.section-header, .glass-card').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight) {
           el.style.opacity = '1';
           el.style.transform = 'translateY(0)';
         }
@@ -379,51 +432,35 @@
   // ===== SCROLL TO TOP =====
   function initScrollToTop() {
     const btn = document.getElementById('btn-scroll-top');
-    
-    window.addEventListener('scroll', () => {
-      btn.classList.toggle('visible', window.scrollY > 500);
-    });
-
-    btn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    window.addEventListener('scroll', () => btn.classList.toggle('visible', window.scrollY > 500));
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
 
-  // ===== COPY BUTTONS =====
+  // ===== COPY =====
   function initCopyButtons() {
     window.copyText = function(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        showToast('Berhasil disalin! 📋');
-      }).catch(() => {
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        document.body.appendChild(textarea);
-        textarea.select();
+      navigator.clipboard.writeText(text).then(() => showToast('Berhasil disalin! 📋')).catch(() => {
+        const t = document.createElement('textarea');
+        t.value = text;
+        document.body.appendChild(t);
+        t.select();
         document.execCommand('copy');
-        document.body.removeChild(textarea);
+        document.body.removeChild(t);
         showToast('Berhasil disalin! 📋');
       });
     };
   }
 
-  // ===== TOAST NOTIFICATION =====
-  function showToast(message) {
-    const existing = document.querySelector('.toast');
-    if (existing) existing.remove();
-
+  // ===== TOAST =====
+  function showToast(msg) {
+    const old = document.querySelector('.toast');
+    if (old) old.remove();
     const toast = document.createElement('div');
     toast.className = 'toast';
-    toast.textContent = message;
+    toast.textContent = msg;
     document.body.appendChild(toast);
-
-    requestAnimationFrame(() => {
-      toast.classList.add('show');
-    });
-
-    setTimeout(() => {
-      toast.classList.remove('show');
-      setTimeout(() => toast.remove(), 400);
-    }, 3000);
+    requestAnimationFrame(() => toast.classList.add('show'));
+    setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 3000);
   }
 
 })();
