@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding Invitation - Ahmad & Siti</title>
+  <meta name="description" content="Undangan pernikahan Ahmad & Siti - 20 Desember 2026">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ==================== LOADING SCREEN ==================== -->
+  <div id="loading-screen">
+    <div class="loader-content">
+      <div class="loader-ring"></div>
+      <p class="loader-text">Memuat Undangan...</p>
+    </div>
+  </div>
+
+  <!-- ==================== INTRO 3D (COVER) ==================== -->
+  <div id="intro-screen">
+    <canvas id="intro-canvas"></canvas>
+    <div id="intro-overlay">
+      <div class="intro-text">
+        <p class="intro-subtitle">The Wedding of</p>
+        <h1 class="intro-names">Ahmad & Siti</h1>
+        <p class="intro-date">20 . 12 . 2026</p>
+      </div>
+      <button id="btn-open" class="btn-golden">
+        <span>💌 Buka Undangan</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <div id="main-content" class="hidden">
+    <!-- 3D Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Music Player (Fixed) -->
+    <div id="music-player">
+      <button id="btn-music" class="btn-music">
+        <svg id="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+      <span class="music-label">♪ Music</span>
+    </div>
+
+    <!-- ===== HERO / NAMA MEMPELAI ===== -->
+    <section id="hero" class="section">
+      <div class="section-inner">
+        <div class="ornament-top">✦</div>
+        <p class="section-subtitle">The Wedding Celebration of</p>
+        <h1 class="couple-names">
+          <span class="name-groom">Ahmad Fauzi</span>
+          <span class="ampersand">&</span>
+          <span class="name-bride">Siti Nurhaliza</span>
+        </h1>
+        <p class="wedding-date">Minggu, 20 Desember 2026</p>
+        <div class="ornament-bottom">✦</div>
+      </div>
+    </section>
+
+    <!-- ===== FOTO PASANGAN ===== -->
+    <section id="couple" class="section">
+      <div class="section-inner">
+        <h2 class="section-title">Mempelai</h2>
+        <div class="couple-grid">
+          <div class="couple-card glass-card">
+            <div class="photo-frame">
+              <img src="assets/images/groom.jpg" alt="Mempelai Pria" class="couple-photo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23f5e6d3%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22105%22 text-anchor=%22middle%22 font-size=%2240%22>🤵</text></svg>'">
+            </div>
+            <h3>Ahmad Fauzi</h3>
+            <p class="parent-names">Putra dari Bpk. H. Abdul Rahman & Ibu Hj. Fatimah</p>
+            <p class="couple-quote">"Allah menciptakanmu untukku"</p>
+          </div>
+          <div class="couple-heart">💕</div>
+          <div class="couple-card glass-card">
+            <div class="photo-frame">
+              <img src="assets/images/bride.jpg" alt="Mempelai Wanita" class="couple-photo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23f5e6d3%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22105%22 text-anchor=%22middle%22 font-size=%2240%22>👰</text></svg>'">
+            </div>
+            <h3>Siti Nurhaliza</h3>
+            <p class="parent-names">Putri dari Bpk. H. Ismail & Ibu Hj. Khadijah</p>
+            <p class="couple-quote">"Kau adalah jawaban doaku"</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TANGGAL & WAKTU ===== -->
+    <section id="event" class="section">
+      <div class="section-inner">
+        <h2 class="section-title">Waktu & Tempat</h2>
+        <div class="event-grid">
+          <!-- Akad Nikah -->
+          <div class="event-card glass-card">
+            <div class="event-icon">🕌</div>
+            <h3>Akad Nikah</h3>
+            <div class="event-detail">
+              <p><strong>📅 Minggu, 20 Desember 2026</strong></p>
+              <p>🕐 08:00 - 10:00 WIB</p>
+              <p>📍 Masjid Al-Ikhlas</p>
+              <p>Jl. Merdeka No. 123, Jakarta Selatan</p>
+            </div>
+            <a href="https://maps.google.com/?q=Masjid+Al+Ikhlas+Jakarta" target="_blank" class="btn-maps">
+              📍 Buka Google Maps
+            </a>
+          </div>
+          <!-- Resepsi -->
+          <div class="event-card glass-card">
+            <div class="event-icon">🎉</div>
+            <h3>Resepsi</h3>
+            <div class="event-detail">
+              <p><strong>📅 Minggu, 20 Desember 2026</strong></p>
+              <p>🕐 11:00 - 14:00 WIB</p>
+              <p>📍 Ballroom Hotel Grand Sahid</p>
+              <p>Jl. Jend. Sudirman Kav. 86, Jakarta</p>
+            </div>
+            <a href="https://maps.google.com/?q=Grand+Sahid+Hotel+Jakarta" target="_blank" class="btn-maps">
+              📍 Buka Google Maps
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== COUNTDOWN ===== -->
+    <section id="countdown" class="section">
+      <div class="section-inner">
+        <h2 class="section-title">Menuju Hari Bahagia</h2>
+        <div class="countdown-grid">
+          <div class="countdown-item glass-card">
+            <span id="cd-days" class="countdown-num">0</span>
+            <span class="countdown-label">Hari</span>
+          </div>
+          <div class="countdown-item glass-card">
+            <span id="cd-hours" class="countdown-num">0</span>
+            <span class="countdown-label">Jam</span>
+          </div>
+          <div class="countdown-item glass-card">
+            <span id="cd-minutes" class="countdown-num">0</span>
+            <span class="countdown-label">Menit</span>
+          </div>
+          <div class="countdown-item glass-card">
+            <span id="cd-seconds" class="countdown-num">0</span>
+            <span class="countdown-label">Detik</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LOVE STORY ===== -->
+    <section id="lovestory" class="section">
+      <div class="section-inner">
+        <h2 class="section-title">Cerita Cinta Kami</h2>
+        <div class="timeline">
+          <div class="timeline-item glass-card">
+            <div class="timeline-dot">💫</div>
+            <div class="timeline-content">
+              <h3>Pertama Bertemu</h3>
+              <p class="timeline-date">Januari 2020</p>
+              <p>Kami pertama kali bertemu di sebuah acara seminar di kampus. Tatapan pertama yang tak terlupakan.</p>
+            </div>
+          </div>
+          <div class="timeline-item glass-card">
+            <div class="timeline-dot">☕</div>
+            <div class="timeline-content">
+              <h3>Kencan Pertama</h3>
+              <p class="timeline-date">Maret 2020</p>
+              <p>Setelah berbulan-bulan berkomunikasi, kami memutuskan untuk kopi darat di kafe kecil dekat kampus.</p>
+            </div>
+          </div>
+          <div class="timeline-item glass-card">
+            <div class="timeline-dot">💍</div>
+            <div class="timeline-content">
+              <h3>Lamaran</h3>
+              <p class="timeline-date">Juni 2026</p>
+              <p>Dengan restu kedua orang tua, Ahmad melamar Siti di taman bunga yang indah saat matahari terbenam.</p>
+            </div>
+          </div>
+          <div class="timeline-item glass-card">
+            <div class="timeline-dot">💒</div>
+            <div class="timeline-content">
+              <h3>Pernikahan</h3>
+              <p class="timeline-date">Desember 2026</p>
+              <p>Alhamdulillah, hari yang kami nantikan akan segera tiba. Kami mengundang Anda untuk menjadi saksi.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GALERI FOTO ===== -->
+    <section id="gallery" class="section">
+      <div class="section-inner">
+        <h2 class="section-title">Galeri Foto</h2>
+        <div class="carousel-container">
+          <div class="carousel-track" id="carousel-track">
+            <div class="carousel-slide"><img src="assets/images/gallery1.jpg" alt="Foto 1" onerror="this.parentElement.innerHTML='<div class=placeholder-photo'>📸 Foto 1</div>'"></div>
+            <div class="carousel-slide"><img src="assets/images/gallery2.jpg" alt="Foto 2" onerror="this.parentElement.innerHTML='<div class=placeholder-photo'>📸 Foto 2</div>'"></div>
+            <div class="carousel-slide"><img src="assets/images/gallery3.jpg" alt="Foto 3" onerror="this.parentElement.innerHTML='<div class=placeholder-photo'>📸 Foto 3</div>'"></div>
+            <div class="carousel-slide"><img src="assets/images/gallery4.jpg" alt="Foto 4" onerror="this.parentElement.innerHTML='<div class=placeholder-photo'>📸 Foto 4</div>'"></div>
+            <div class="carousel-slide"><img src="assets/images/gallery5.jpg" alt="Foto 5" onerror="this.parentElement.innerHTML='<div class=placeholder-photo'>📸 Foto 5</div>'"></div>
+            <div class="carousel-slide"><img src="assets/images/gallery6.jpg" alt="Foto 6" onerror="this.parentElement.innerHTML='<div class=placeholder-photo'>📸 Foto 6</div>'"></div>
+          </div>
+          <button class="carousel-btn carousel-prev" id="carousel-prev">❮</button>
+          <button class="carousel-btn carousel-next" id="carousel-next">❯</button>
+          <div class="carousel-dots" id="carousel-dots"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BUKU TAMU & UCAPAN ===== -->
+    <section id="guestbook" class="section">
+      <div class="section-inner">
+        <h2 class="section-title">Buku Tamu & Ucapan</h2>
+        <div class="guestbook-form glass-card">
+          <form id="form-ucapan">
+            <div class="form-group">
+              <input type="text" id="gb-name" placeholder="Nama Anda" required>
+            </div>
+            <div class="form-group">
+              <select id="gb-attendance" required>
+                <option value="" disabled selected>Konfirmasi Kehadiran</option>
+                <option value="hadir">✅ Akan Hadir</option>
+                <option value="tidak">❌ Tidak Bisa Hadir</option>
+                <option value="ragu">🤔 Masih Ragu</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <textarea id="gb-message" placeholder="Tulis ucapan & doa untuk kedua mempelai..." rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn-golden">💌 Kirim Ucapan</button>
+          </form>
+        </div>
+        <div class="guestbook-list" id="guestbook-list">
+          <!-- Ucapan akan muncul di sini -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== RSVP ===== -->
+    <section id="rsvp" class="section">
+      <div class="section-inner">
+        <h2 class="section-title">RSVP</h2>
+        <div class="rsvp-card glass-card">
+          <p class="rsvp-text">Mohon konfirmasi kehadiran Anda sebelum <strong>10 Desember 2026</strong></p>
+          <div class="rsvp-buttons">
+            <button class="btn-rsvp btn-hadir" onclick="submitRSVP('hadir')">✅ Akan Hadir</button>
+            <button class="btn-rsvp btn-tidak" onclick="submitRSVP('tidak')">❌ Tidak Hadir</button>
+          </div>
+          <p id="rsvp-thanks" class="rsvp-thanks hidden">Terima kasih atas konfirmasinya! 🙏</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CLOSING ===== -->
+    <section id="closing" class="section">
+      <div class="section-inner">
+        <div class="ornament-top">✦</div>
+        <p class="closing-quote">"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."</p>
+        <p class="closing-verse">— QS. Ar-Rum: 21 —</p>
+        <h2 class="closing-names">Ahmad & Siti</h2>
+        <p class="closing-thanks">Merupakan suatu kebahagiaan dan kehormatan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kami.</p>
+        <p class="closing-wassalam">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
+        <div class="ornament-bottom">✦</div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <p>Made with ❤️ | Ahmad & Siti © 2026</p>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <button id="btn-scroll-top" class="btn-scroll-top hidden">↑</button>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="js/intro3d.js"></script>
+  <script src="js/scene3d.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
