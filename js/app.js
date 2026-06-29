@@ -1,6 +1,6 @@
 /* ========================================
    WEDDING INVITATION - APP LOGIC
-   Modern Elegant Version
+   Envitto Style Version
    ======================================== */
 
 (function() {
@@ -17,33 +17,23 @@
   // ===== STATE =====
   let audio = null;
   let isPlaying = false;
-  let swiper = null;
+  let loveSwiper = null;
+  let gallerySwiper = null;
 
   // ===== INIT =====
   document.addEventListener('DOMContentLoaded', () => {
-    initLoadingScreen();
     initCover();
-    initPetals();
+    initParticles();
     initCountdown();
-    initNavigation();
     initMusic();
+    initLoveStory();
     initGallery();
     initWishes();
     initScrollAnimations();
     initScrollToTop();
     initCopyButtons();
+    initSaveDate();
   });
-
-  // ===== LOADING SCREEN =====
-  function initLoadingScreen() {
-    const loader = document.getElementById('loading-screen');
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        loader.classList.add('fade-out');
-        setTimeout(() => loader.remove(), 800);
-      }, 1500);
-    });
-  }
 
   // ===== COVER PAGE =====
   function initCover() {
@@ -59,12 +49,12 @@
       CONFIG.guestName = guestName;
     }
 
-    btnOpen.addEventListener('click', () => {
-      // Fade out cover
-      cover.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-      cover.style.opacity = '0';
-      cover.style.transform = 'scale(1.05)';
+    // Prevent scroll on cover
+    document.body.style.overflow = 'hidden';
 
+    btnOpen.addEventListener('click', () => {
+      cover.classList.add('fade-out');
+      
       setTimeout(() => {
         cover.style.display = 'none';
         mainContent.classList.remove('hidden');
@@ -77,26 +67,23 @@
         triggerScrollAnimations();
       }, 800);
     });
-
-    // Prevent scroll on cover
-    document.body.style.overflow = 'hidden';
   }
 
-  // ===== FLOATING PETALS =====
-  function initPetals() {
-    const containers = document.querySelectorAll('.floating-petals');
-    containers.forEach(container => {
-      for (let i = 0; i < 15; i++) {
-        const petal = document.createElement('div');
-        petal.className = 'petal';
-        petal.style.left = Math.random() * 100 + '%';
-        petal.style.animationDuration = (8 + Math.random() * 12) + 's';
-        petal.style.animationDelay = Math.random() * 10 + 's';
-        petal.style.opacity = 0.1 + Math.random() * 0.2;
-        petal.style.transform = `scale(${0.5 + Math.random() * 0.5})`;
-        container.appendChild(petal);
-      }
-    });
+  // ===== FLOATING PARTICLES =====
+  function initParticles() {
+    const container = document.getElementById('cover-particles');
+    if (!container) return;
+
+    for (let i = 0; i < 20; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDuration = (10 + Math.random() * 15) + 's';
+      particle.style.animationDelay = Math.random() * 10 + 's';
+      particle.style.width = (2 + Math.random() * 4) + 'px';
+      particle.style.height = particle.style.width;
+      container.appendChild(particle);
+    }
   }
 
   // ===== COUNTDOWN =====
@@ -142,38 +129,24 @@
     setInterval(update, 1000);
   }
 
-  // ===== NAVIGATION =====
-  function initNavigation() {
-    const navItems = document.querySelectorAll('.nav-item');
-    const sections = document.querySelectorAll('.section[id]');
+  // ===== SAVE DATE =====
+  function initSaveDate() {
+    const btn = document.getElementById('btn-save-date');
+    if (!btn) return;
 
-    // Smooth scroll
-    navItems.forEach(item => {
-      item.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = document.querySelector(item.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
+    btn.addEventListener('click', () => {
+      // Create calendar event
+      const title = 'Pernikahan Putri & Andika';
+      const start = '20261228T010000Z';
+      const end = '20261228T070000Z';
+      const details = 'Akad Nikah & Resepsi - Masjid Al-Ikhlas, Jakarta Selatan';
+      const location = 'Masjid Al-Ikhlas, Jl. Merdeka No. 123, Jakarta Selatan';
+
+      const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${start}/${end}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`;
+      
+      window.open(googleUrl, '_blank');
+      showToast('Mengarahkan ke Google Calendar... 📅');
     });
-
-    // Active state on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          navItems.forEach(item => {
-            item.classList.toggle('active', item.dataset.section === id);
-          });
-        }
-      });
-    }, {
-      threshold: 0.3,
-      rootMargin: '-80px 0px -50% 0px'
-    });
-
-    sections.forEach(section => observer.observe(section));
   }
 
   // ===== MUSIC =====
@@ -184,16 +157,10 @@
     audio.volume = 0.5;
     audio.preload = 'auto';
 
-    let musicLoaded = false;
-
     function tryLoad(url) {
       audio.src = url;
       audio.load();
     }
-
-    audio.addEventListener('canplaythrough', () => {
-      musicLoaded = true;
-    });
 
     audio.addEventListener('error', () => {
       if (audio.src.includes('.mp3')) {
@@ -235,21 +202,41 @@
     btn.classList.toggle('playing', isPlaying);
   }
 
-  // ===== GALLERY (Swiper) =====
+  // ===== LOVE STORY SWIPER =====
+  function initLoveStory() {
+    loveSwiper = new Swiper('.love-swiper', {
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false
+      },
+      pagination: {
+        el: '.love-swiper .swiper-pagination',
+        clickable: true
+      },
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      },
+      grabCursor: true
+    });
+  }
+
+  // ===== GALLERY SWIPER =====
   function initGallery() {
-    swiper = new Swiper('.gallery-swiper', {
+    gallerySwiper = new Swiper('.gallery-swiper', {
       loop: true,
       autoplay: {
         delay: 4000,
         disableOnInteraction: false
       },
       pagination: {
-        el: '.swiper-pagination',
+        el: '.gallery-swiper .swiper-pagination',
         clickable: true
       },
       navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
+        nextEl: '.gallery-swiper .swiper-button-next',
+        prevEl: '.gallery-swiper .swiper-button-prev'
       },
       effect: 'coverflow',
       coverflowEffect: {
@@ -359,6 +346,8 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
         }
       });
     }, {
@@ -366,11 +355,8 @@
       rootMargin: '0px 0px -50px 0px'
     });
 
-    // Observe fade-up elements
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-    // Observe section headers
-    document.querySelectorAll('.section-header, .profile-card, .event-card, .timeline-item, .gift-card, .wish-card').forEach(el => {
+    // Observe elements
+    document.querySelectorAll('.section-header, .profile-card, .event-card, .dresscode-card, .love-card, .gift-card, .wish-card').forEach(el => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(30px)';
       el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -379,9 +365,8 @@
   }
 
   function triggerScrollAnimations() {
-    // Immediately show elements in viewport
     setTimeout(() => {
-      document.querySelectorAll('.section-header, .profile-card, .event-card, .timeline-item, .gift-card').forEach(el => {
+      document.querySelectorAll('.section-header, .profile-card, .event-card, .dresscode-card').forEach(el => {
         const rect = el.getBoundingClientRect();
         if (rect.top < window.innerHeight) {
           el.style.opacity = '1';
@@ -410,7 +395,6 @@
       navigator.clipboard.writeText(text).then(() => {
         showToast('Berhasil disalin! 📋');
       }).catch(() => {
-        // Fallback
         const textarea = document.createElement('textarea');
         textarea.value = text;
         document.body.appendChild(textarea);

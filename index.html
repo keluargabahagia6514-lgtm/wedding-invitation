@@ -5,117 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Wedding Putri & Andika</title>
   <meta name="description" content="Undangan Pernikahan Putri & Andika">
-  <meta property="og:title" content="Wedding Putri & Andika">
-  <meta property="og:description" content="Undangan Pernikahan Putri & Andika">
-  <meta property="og:image" content="assets/images/og-image.jpg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Great+Vibes&family=Montserrat:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Pinyon+Script&family=Karla:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- ==================== LOADING SCREEN ==================== -->
-  <div id="loading-screen">
-    <div class="loader">
-      <div class="loader-ring"></div>
-      <div class="loader-text">
-        <span class="loader-letter" style="--i:0">P</span>
-        <span class="loader-letter" style="--i:1">&</span>
-        <span class="loader-letter" style="--i:2">A</span>
-      </div>
-    </div>
-  </div>
-
   <!-- ==================== COVER PAGE ==================== -->
-  <section id="cover" class="section section-cover">
-    <div class="cover-bg">
-      <div class="floating-petals" id="cover-petals"></div>
-    </div>
+  <section id="cover" class="cover">
+    <!-- Background Pattern -->
+    <div class="cover-bg-pattern"></div>
+    
+    <!-- Floating Particles -->
+    <div class="cover-particles" id="cover-particles"></div>
+    
+    <!-- Cover Content -->
     <div class="cover-content">
-      <div class="cover-frame">
-        <div class="frame-corner top-left"></div>
-        <div class="frame-corner top-right"></div>
-        <div class="frame-corner bottom-left"></div>
-        <div class="frame-corner bottom-right"></div>
-        
-        <div class="cover-subtitle fade-up">The Wedding Of</div>
-        <h1 class="cover-names fade-up delay-1">
-          <span class="name-bride">Putri</span>
-          <span class="name-amp">&</span>
-          <span class="name-groom">Andika</span>
-        </h1>
-        
-        <div class="cover-divider fade-up delay-2">
-          <span class="divider-line"></span>
-          <span class="divider-icon"><i class="fas fa-heart"></i></span>
-          <span class="divider-line"></span>
-        </div>
-        
-        <div class="cover-guest fade-up delay-3">
-          <p class="guest-label">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-          <h2 class="guest-name" id="guest-name">Tamu Undangan</h2>
-          <p class="guest-note">*Mohon maaf jika ada kesalahan dalam penulisan nama / gelar.</p>
-        </div>
-        
-        <button class="btn-open fade-up delay-4" id="btn-open">
-          <span class="btn-icon"><i class="fas fa-envelope-open"></i></span>
-          <span class="btn-text">Buka Undangan</span>
-        </button>
+      <div class="cover-ornament-top">
+        <svg viewBox="0 0 200 30" class="ornament-svg">
+          <path d="M0,15 Q50,0 100,15 Q150,30 200,15" fill="none" stroke="currentColor" stroke-width="0.5"/>
+        </svg>
       </div>
+      
+      <p class="cover-subtitle">The Wedding Of</p>
+      <h1 class="cover-names">Putri & Andika</h1>
+      
+      <div class="cover-ornament-mid">
+        <svg viewBox="0 0 100 20" class="ornament-svg">
+          <path d="M0,10 Q25,0 50,10 Q75,20 100,10" fill="none" stroke="currentColor" stroke-width="0.5"/>
+        </svg>
+      </div>
+      
+      <div class="cover-guest">
+        <p class="guest-to">Kepada Yth.<br>Bapak/Ibu/Saudara/i</p>
+        <h2 class="guest-name" id="guest-name">Tamu Undangan</h2>
+        <p class="guest-note">*Mohon maaf jika ada kesalahan dalam penulisan nama / gelar.</p>
+      </div>
+      
+      <button class="btn-open" id="btn-open">
+        <span>Buka Undangan</span>
+      </button>
     </div>
   </section>
 
   <!-- ==================== MAIN CONTENT ==================== -->
   <main id="main-content" class="main-content hidden">
 
-    <!-- ===== NAVIGATION ===== -->
-    <nav class="floating-nav" id="floating-nav">
-      <div class="nav-items">
-        <a href="#hero" class="nav-item active" data-section="hero">
-          <i class="fas fa-heart"></i>
-          <span>Home</span>
-        </a>
-        <a href="#couple" class="nav-item" data-section="couple">
-          <i class="fas fa-users"></i>
-          <span>Mempelai</span>
-        </a>
-        <a href="#event" class="nav-item" data-section="event">
-          <i class="fas fa-calendar"></i>
-          <span>Acara</span>
-        </a>
-        <a href="#gallery" class="nav-item" data-section="gallery">
-          <i class="fas fa-image"></i>
-          <span>Galeri</span>
-        </a>
-        <a href="#rsvp" class="nav-item" data-section="rsvp">
-          <i class="fas fa-check-circle"></i>
-          <span>RSVP</span>
-        </a>
-      </div>
-    </nav>
-
-    <!-- Music Control -->
-    <button class="music-control" id="music-control">
-      <i class="fas fa-music"></i>
-      <div class="music-bars">
-        <span></span><span></span><span></span>
-      </div>
-    </button>
-
-    <!-- ===== HERO / BISMILLAH ===== -->
-    <section id="hero" class="section section-hero">
+    <!-- ===== BISMILLAH / HERO ===== -->
+    <section id="hero" class="section section-bismillah">
+      <div class="section-bg"></div>
       <div class="section-inner">
-        <div class="hero-ornament">
-          <i class="fas fa-star"></i>
+        <div class="bismillah-letters">
+          <span class="letter">P</span>
+          <span class="letter">A</span>
         </div>
-        <h2 class="section-subtitle">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</h2>
-        <div class="hero-names">
-          <span class="letter letter-p">P</span>
-          <span class="letter letter-a">A</span>
-        </div>
-        <div class="hero-verse">
+        <div class="quran-verse">
           <p>"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."</p>
           <cite>Q.S Ar-Rum : 21</cite>
         </div>
@@ -128,11 +74,6 @@
         <div class="section-header">
           <span class="section-label">Bride & Groom</span>
           <h2 class="section-title">Mempelai</h2>
-          <div class="title-ornament">
-            <span class="ornament-line"></span>
-            <i class="fas fa-heart"></i>
-            <span class="ornament-line"></span>
-          </div>
         </div>
         
         <div class="couple-intro">
@@ -145,9 +86,8 @@
           <div class="profile-card">
             <div class="profile-photo-wrapper">
               <div class="photo-frame">
-                <img src="assets/images/bride.jpg" alt="Putri" class="profile-photo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 300%22><rect fill=%22%23f8f4ef%22 width=%22300%22 height=%22300%22/><text x=%22150%22 y=%22160%22 text-anchor=%22middle%22 font-size=%2260%22>👰</text></svg>'">
+                <img src="assets/images/bride.jpg" alt="Putri" class="profile-photo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 300%22><rect fill=%22%23FFFCF3%22 width=%22300%22 height=%22300%22/><text x=%22150%22 y=%22160%22 text-anchor=%22middle%22 font-size=%2260%22>👰</text></svg>'">
               </div>
-              <div class="photo-decoration"></div>
             </div>
             <h3 class="profile-nickname">Putri</h3>
             <h4 class="profile-fullname">Putri Cantika Sari</h4>
@@ -159,22 +99,12 @@
             </a>
           </div>
 
-          <!-- Separator -->
-          <div class="couple-separator">
-            <div class="separator-line"></div>
-            <div class="separator-heart">
-              <i class="fas fa-heart"></i>
-            </div>
-            <div class="separator-line"></div>
-          </div>
-
           <!-- Groom -->
           <div class="profile-card">
             <div class="profile-photo-wrapper">
               <div class="photo-frame">
-                <img src="assets/images/groom.jpg" alt="Andika" class="profile-photo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 300%22><rect fill=%22%23f8f4ef%22 width=%22300%22 height=%22300%22/><text x=%22150%22 y=%22160%22 text-anchor=%22middle%22 font-size=%2260%22>🤵</text></svg>'">
+                <img src="assets/images/groom.jpg" alt="Andika" class="profile-photo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 300%22><rect fill=%22%23FFFCF3%22 width=%22300%22 height=%22300%22/><text x=%22150%22 y=%22160%22 text-anchor=%22middle%22 font-size=%2260%22>🤵</text></svg>'">
               </div>
-              <div class="photo-decoration"></div>
             </div>
             <h3 class="profile-nickname">Andika</h3>
             <h4 class="profile-fullname">Putra Andika Pratama</h4>
@@ -191,9 +121,6 @@
 
     <!-- ===== SAVE THE DATE / COUNTDOWN ===== -->
     <section id="countdown" class="section section-countdown">
-      <div class="countdown-bg">
-        <div class="countdown-pattern"></div>
-      </div>
       <div class="section-inner">
         <div class="section-header">
           <span class="section-label">Save The Date</span>
@@ -228,92 +155,102 @@
 
     <!-- ===== EVENT DETAILS ===== -->
     <section id="event" class="section section-event">
-      <div class="section-inner">
-        <div class="event-cards">
-          <!-- Akad Nikah -->
-          <div class="event-card">
-            <div class="event-icon">
-              <i class="fas fa-mosque"></i>
-            </div>
-            <h3 class="event-title">Akad Nikah</h3>
-            <div class="event-day">Minggu</div>
-            <div class="event-date-big">28</div>
-            <div class="event-month-year">
-              <span>Desember</span>
-              <span class="event-dot">•</span>
-              <span>2026</span>
-            </div>
-            <div class="event-time">
-              <i class="fas fa-clock"></i>
-              <span>08:00 - 10:00 WIB</span>
-            </div>
-            <div class="event-location">
-              <h4><i class="fas fa-map-marker-alt"></i> Lokasi Acara</h4>
-              <p>Masjid Al-Ikhlas</p>
-              <p>Jl. Merdeka No. 123, Jakarta Selatan</p>
-            </div>
-            <a href="https://maps.google.com/?q=Masjid+Al+Ikhlas+Jakarta" target="_blank" class="btn-maps">
-              <i class="fas fa-map-marked-alt"></i>
-              <span>Google Maps</span>
-            </a>
+      <div class="event-cards">
+        <!-- Akad Nikah -->
+        <div class="event-card">
+          <div class="event-icon">
+            <i class="fas fa-mosque"></i>
           </div>
+          <h3 class="event-title">Akad Nikah</h3>
+          <div class="event-day">Minggu</div>
+          <div class="event-date-big">28</div>
+          <div class="event-month-year">
+            <span>Desember</span>
+            <span class="event-dot">•</span>
+            <span>2026</span>
+          </div>
+          <div class="event-time">
+            <i class="fas fa-clock"></i>
+            <span>08:00 WIB</span>
+          </div>
+          <div class="event-location">
+            <h4>Lokasi Acara</h4>
+            <p>Masjid Al-Ikhlas</p>
+            <p>Jl. Merdeka No. 123, Jakarta Selatan</p>
+          </div>
+          <a href="https://maps.google.com/?q=Masjid+Al+Ikhlas+Jakarta" target="_blank" class="btn-maps">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Google Maps</span>
+          </a>
+        </div>
 
-          <!-- Resepsi -->
-          <div class="event-card">
-            <div class="event-icon">
-              <i class="fas fa-glass-cheers"></i>
-            </div>
-            <h3 class="event-title">Resepsi</h3>
-            <div class="event-day">Minggu</div>
-            <div class="event-date-big">28</div>
-            <div class="event-month-year">
-              <span>Desember</span>
-              <span class="event-dot">•</span>
-              <span>2026</span>
-            </div>
-            <div class="event-time">
-              <i class="fas fa-clock"></i>
-              <span>11:00 - 14:00 WIB</span>
-            </div>
-            <div class="event-location">
-              <h4><i class="fas fa-map-marker-alt"></i> Lokasi Acara</h4>
-              <p>Ballroom Hotel Grand Sahid</p>
-              <p>Jl. Jend. Sudirman Kav. 86, Jakarta</p>
-            </div>
-            <a href="https://maps.google.com/?q=Grand+Sahid+Hotel+Jakarta" target="_blank" class="btn-maps">
-              <i class="fas fa-map-marked-alt"></i>
-              <span>Google Maps</span>
-            </a>
+        <!-- Resepsi -->
+        <div class="event-card">
+          <div class="event-icon">
+            <i class="fas fa-glass-cheers"></i>
           </div>
+          <h3 class="event-title">Resepsi</h3>
+          <div class="event-day">Minggu</div>
+          <div class="event-date-big">28</div>
+          <div class="event-month-year">
+            <span>Desember</span>
+            <span class="event-dot">•</span>
+            <span>2026</span>
+          </div>
+          <div class="event-time">
+            <i class="fas fa-clock"></i>
+            <span>09:00 - 13:00 WIB</span>
+          </div>
+          <div class="event-location">
+            <h4>Lokasi Acara</h4>
+            <p>Ballroom Hotel Grand Sahid</p>
+            <p>Jl. Jend. Sudirman Kav. 86, Jakarta</p>
+          </div>
+          <a href="https://maps.google.com/?q=Grand+Sahid+Hotel+Jakarta" target="_blank" class="btn-maps">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Google Maps</span>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- ===== DRESSCODE ===== -->
+    <!-- ===== DRESSCODE & LIVE STREAMING ===== -->
     <section id="dresscode" class="section section-dresscode">
-      <div class="section-inner">
-        <div class="section-header">
-          <span class="section-label">Dresscode</span>
-          <h2 class="section-title">Pakaian</h2>
+      <div class="dresscode-grid">
+        <div class="dresscode-card">
+          <div class="section-header">
+            <h2 class="section-title">Dresscode</h2>
+          </div>
+          <p class="dresscode-desc">Kami dengan hormat menganjurkan tamu kami untuk mengenakan warna-warna ini untuk hari istimewa kami.</p>
+          <div class="dresscode-colors">
+            <div class="color-item">
+              <div class="color-circle" style="background: #2C3E50;"></div>
+              <span>Navy</span>
+            </div>
+            <div class="color-item">
+              <div class="color-circle" style="background: #8E7C68;"></div>
+              <span>Khaki</span>
+            </div>
+            <div class="color-item">
+              <div class="color-circle" style="background: #D2B473;"></div>
+              <span>Gold</span>
+            </div>
+            <div class="color-item">
+              <div class="color-circle" style="background: #FFFCF3;"></div>
+              <span>Cream</span>
+            </div>
+          </div>
         </div>
-        <p class="dresscode-desc">Kami dengan hormat menganjurkan tamu kami untuk mengenakan warna-warna ini untuk hari istimewa kami.</p>
-        <div class="dresscode-colors">
-          <div class="color-item">
-            <div class="color-circle" style="background: #2C3E50;"></div>
-            <span>Navy</span>
+        
+        <div class="dresscode-card">
+          <div class="section-header">
+            <h2 class="section-title">Live Streaming</h2>
           </div>
-          <div class="color-item">
-            <div class="color-circle" style="background: #8E7C68;"></div>
-            <span>Khaki</span>
-          </div>
-          <div class="color-item">
-            <div class="color-circle" style="background: #D4AF37;"></div>
-            <span>Gold</span>
-          </div>
-          <div class="color-item">
-            <div class="color-circle" style="background: #F5F0E8;"></div>
-            <span>Cream</span>
-          </div>
+          <p class="dresscode-desc">Temui kami secara virtual untuk menyaksikan acara pernikahan kami yang insyaaAllah akan disiarkan langsung melalui link dibawah ini.</p>
+          <button class="btn-streaming">
+            <i class="fas fa-video"></i>
+            <span>Lihat Live Streaming</span>
+          </button>
         </div>
       </div>
     </section>
@@ -324,47 +261,41 @@
         <div class="section-header">
           <span class="section-label">Love Story</span>
           <h2 class="section-title">Cerita Cinta</h2>
-          <div class="title-ornament">
-            <span class="ornament-line"></span>
-            <i class="fas fa-heart"></i>
-            <span class="ornament-line"></span>
-          </div>
         </div>
 
-        <div class="timeline">
-          <div class="timeline-line"></div>
-          
-          <div class="timeline-item">
-            <div class="timeline-dot">
-              <i class="fas fa-star"></i>
+        <div class="love-carousel swiper love-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="love-card">
+                <div class="love-date">25 AGUSTUS 2023</div>
+                <p class="love-desc">Berawal dari tempat pekerjaan Cianjur-2023, kami mengenal satu sama lain dan belum ada benih cinta kala itu, hanya sebatas teman kerja.</p>
+              </div>
             </div>
-            <div class="timeline-card">
-              <div class="timeline-date">25 Agustus 2023</div>
-              <h3 class="timeline-title">Pertama Bertemu</h3>
-              <p class="timeline-desc">Berawal dari tempat pekerjaan di Cianjur, kami mengenal satu sama lain dan belum ada benih cinta kala itu, hanya sebatas teman kerja.</p>
+            <div class="swiper-slide">
+              <div class="love-card">
+                <div class="love-date">03 JUNI 2024</div>
+                <p class="love-desc">Setelah cukup mengenal satu sama lain, satu tahun kurang lebih nya kami menjalin hubungan. 03 Juni 2024 Akhirnya kita memutuskan untuk melanjutkan ke Hubungan yang lebih serius mempertemukan kedua keluarga.</p>
+              </div>
             </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-dot">
-              <i class="fas fa-heart"></i>
-            </div>
-            <div class="timeline-card">
-              <div class="timeline-date">03 Juni 2024</div>
-              <h3 class="timeline-title">Hubungan Serius</h3>
-              <p class="timeline-desc">Setelah cukup mengenal satu sama lain, satu tahun kurang lebihnya kami menjalin hubungan. Akhirnya kita memutuskan untuk melanjutkan ke hubungan yang lebih serius mempertemukan kedua keluarga.</p>
+            <div class="swiper-slide">
+              <div class="love-card">
+                <div class="love-date">29 DESEMBER 2025</div>
+                <p class="love-desc">Sampai tanggal ini kami melaksanakan akad terlebih dahulu dan akhirnya kami mengubah status hingga menjadi pasangan suami istri. Semoga allah swt. Memberikan keberkahan pernikahan ini. "AMIN"</p>
+              </div>
             </div>
           </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
 
-          <div class="timeline-item">
-            <div class="timeline-dot">
-              <i class="fas fa-ring"></i>
-            </div>
-            <div class="timeline-card">
-              <div class="timeline-date">29 Desember 2025</div>
-              <h3 class="timeline-title">Akad Nikah</h3>
-              <p class="timeline-desc">Sampai tanggal ini kami melaksanakan akad terlebih dahulu dan akhirnya kami mengubah status hingga menjadi pasangan suami istri. Semoga Allah SWT memberikan keberkahan pernikahan ini. Aamiin.</p>
-            </div>
+    <!-- ===== VIDEO PREWED ===== -->
+    <section id="video" class="section section-video">
+      <div class="section-inner">
+        <div class="video-wrapper">
+          <div class="video-placeholder">
+            <i class="fas fa-play-circle"></i>
+            <p>Video Pre-Wedding</p>
           </div>
         </div>
       </div>
@@ -376,32 +307,27 @@
         <div class="section-header">
           <span class="section-label">Our Moments</span>
           <h2 class="section-title">Galeri Foto</h2>
-          <div class="title-ornament">
-            <span class="ornament-line"></span>
-            <i class="fas fa-heart"></i>
-            <span class="ornament-line"></span>
-          </div>
         </div>
 
         <div class="swiper gallery-swiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
-              <img src="assets/images/gallery1.jpg" alt="Moment 1" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23f0ebe3%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2250%22>💑</text></svg>'">
+              <img src="assets/images/gallery1.jpg" alt="Moment 1" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23FFFCF3%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2250%22>💑</text></svg>'">
             </div>
             <div class="swiper-slide">
-              <img src="assets/images/gallery2.jpg" alt="Moment 2" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23f0ebe3%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2250%22>🌹</text></svg>'">
+              <img src="assets/images/gallery2.jpg" alt="Moment 2" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23FFFCF3%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2250%22>🌹</text></svg>'">
             </div>
             <div class="swiper-slide">
-              <img src="assets/images/gallery3.jpg" alt="Moment 3" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23f0ebe3%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2250%22>💍</text></svg>'">
+              <img src="assets/images/gallery3.jpg" alt="Moment 3" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23FFFCF3%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2250%22>💍</text></svg>'">
             </div>
             <div class="swiper-slide">
-              <img src="assets/images/gallery4.jpg" alt="Moment 4" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23f0ebe3%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2250%22>📸</text></svg>'">
+              <img src="assets/images/gallery4.jpg" alt="Moment 4" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23FFFCF3%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2250%22>📸</text></svg>'">
             </div>
             <div class="swiper-slide">
-              <img src="assets/images/gallery5.jpg" alt="Moment 5" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23f0ebe3%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2250%22>💕</text></svg>'">
+              <img src="assets/images/gallery5.jpg" alt="Moment 5" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23FFFCF3%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2250%22>💕</text></svg>'">
             </div>
             <div class="swiper-slide">
-              <img src="assets/images/gallery6.jpg" alt="Moment 6" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23f0ebe3%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2250%22>💒</text></svg>'">
+              <img src="assets/images/gallery6.jpg" alt="Moment 6" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23FFFCF3%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2250%22>💒</text></svg>'">
             </div>
           </div>
           <div class="swiper-pagination"></div>
@@ -417,11 +343,6 @@
         <div class="section-header">
           <span class="section-label">Wedding Gift</span>
           <h2 class="section-title">Kado</h2>
-          <div class="title-ornament">
-            <span class="ornament-line"></span>
-            <i class="fas fa-gift"></i>
-            <span class="ornament-line"></span>
-          </div>
         </div>
         <p class="gift-desc">Tanpa mengurangi rasa hormat, bagi Anda yang ingin memberikan tanda kasih untuk mempelai, dapat mengirimkannya melalui:</p>
         
@@ -460,11 +381,6 @@
         <div class="section-header">
           <span class="section-label">Wishes</span>
           <h2 class="section-title">Ucapan & Doa</h2>
-          <div class="title-ornament">
-            <span class="ornament-line"></span>
-            <i class="fas fa-heart"></i>
-            <span class="ornament-line"></span>
-          </div>
         </div>
 
         <div class="wishes-form">
@@ -500,39 +416,36 @@
 
     <!-- ===== THANK YOU ===== -->
     <section id="closing" class="section section-closing">
-      <div class="closing-bg">
-        <div class="floating-petals" id="closing-petals"></div>
-      </div>
       <div class="section-inner">
-        <div class="closing-frame">
-          <div class="frame-corner top-left"></div>
-          <div class="frame-corner top-right"></div>
-          <div class="frame-corner bottom-left"></div>
-          <div class="frame-corner bottom-right"></div>
-          
-          <h2 class="closing-names">Putri & Andika</h2>
-          <p class="closing-thanks">Merupakan suatu kebahagiaan dan kehormatan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kami.</p>
-          <p class="closing-wassalam">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
-          
-          <div class="closing-divider">
-            <span class="divider-line"></span>
-            <span class="divider-icon"><i class="fas fa-heart"></i></span>
-            <span class="divider-line"></span>
-          </div>
-          
-          <p class="closing-brand">HUBUNGI KAMI</p>
-          <div class="closing-social">
-            <a href="#"><i class="fab fa-whatsapp"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-          </div>
+        <h2 class="closing-names">Putri & Andika</h2>
+        <p class="closing-thanks">Merupakan suatu kebahagiaan dan kehormatan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kami.</p>
+        <p class="closing-wassalam">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
+        
+        <div class="closing-divider">
+          <svg viewBox="0 0 100 20" class="ornament-svg">
+            <path d="M0,10 Q25,0 50,10 Q75,20 100,10" fill="none" stroke="currentColor" stroke-width="0.5"/>
+          </svg>
+        </div>
+        
+        <p class="closing-brand">HUBUNGI KAMI</p>
+        <div class="closing-social">
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        
+        <div class="closing-watermark">
+          <span>Made with ❤️</span>
         </div>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <p>Made with ❤️</p>
-    </footer>
+    <!-- Music Control -->
+    <button class="music-control" id="music-control">
+      <i class="fas fa-music"></i>
+      <div class="music-bars">
+        <span></span><span></span><span></span>
+      </div>
+    </button>
 
     <!-- Scroll to Top -->
     <button class="btn-scroll-top" id="btn-scroll-top">
@@ -542,7 +455,6 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
