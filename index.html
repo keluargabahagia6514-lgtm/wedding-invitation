@@ -2,286 +2,547 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wedding Invitation - Ahmad & Siti</title>
-  <meta name="description" content="Undangan pernikahan Ahmad & Siti - 20 Desember 2026">
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Wedding Putri & Andika</title>
+  <meta name="description" content="Undangan Pernikahan Putri & Andika">
+  <meta property="og:title" content="Wedding Putri & Andika">
+  <meta property="og:description" content="Undangan Pernikahan Putri & Andika">
+  <meta property="og:image" content="assets/images/og-image.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Great+Vibes&family=Montserrat:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
   <!-- ==================== LOADING SCREEN ==================== -->
   <div id="loading-screen">
-    <div class="loader-content">
+    <div class="loader">
       <div class="loader-ring"></div>
-      <p class="loader-text">Memuat Undangan...</p>
+      <div class="loader-text">
+        <span class="loader-letter" style="--i:0">P</span>
+        <span class="loader-letter" style="--i:1">&</span>
+        <span class="loader-letter" style="--i:2">A</span>
+      </div>
     </div>
   </div>
 
-  <!-- ==================== INTRO 3D (COVER) ==================== -->
-  <div id="intro-screen">
-    <canvas id="intro-canvas"></canvas>
-    <div id="intro-overlay">
-      <div class="intro-text">
-        <p class="intro-subtitle">The Wedding of</p>
-        <h1 class="intro-names">Ahmad & Siti</h1>
-        <p class="intro-date">20 . 12 . 2026</p>
-      </div>
-      <button id="btn-open" class="btn-golden">
-        <span>💌 Buka Undangan</span>
-      </button>
+  <!-- ==================== COVER PAGE ==================== -->
+  <section id="cover" class="section section-cover">
+    <div class="cover-bg">
+      <div class="floating-petals" id="cover-petals"></div>
     </div>
-  </div>
+    <div class="cover-content">
+      <div class="cover-frame">
+        <div class="frame-corner top-left"></div>
+        <div class="frame-corner top-right"></div>
+        <div class="frame-corner bottom-left"></div>
+        <div class="frame-corner bottom-right"></div>
+        
+        <div class="cover-subtitle fade-up">The Wedding Of</div>
+        <h1 class="cover-names fade-up delay-1">
+          <span class="name-bride">Putri</span>
+          <span class="name-amp">&</span>
+          <span class="name-groom">Andika</span>
+        </h1>
+        
+        <div class="cover-divider fade-up delay-2">
+          <span class="divider-line"></span>
+          <span class="divider-icon"><i class="fas fa-heart"></i></span>
+          <span class="divider-line"></span>
+        </div>
+        
+        <div class="cover-guest fade-up delay-3">
+          <p class="guest-label">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+          <h2 class="guest-name" id="guest-name">Tamu Undangan</h2>
+          <p class="guest-note">*Mohon maaf jika ada kesalahan dalam penulisan nama / gelar.</p>
+        </div>
+        
+        <button class="btn-open fade-up delay-4" id="btn-open">
+          <span class="btn-icon"><i class="fas fa-envelope-open"></i></span>
+          <span class="btn-text">Buka Undangan</span>
+        </button>
+      </div>
+    </div>
+  </section>
 
   <!-- ==================== MAIN CONTENT ==================== -->
-  <div id="main-content" class="hidden">
-    <!-- 3D Background Canvas -->
-    <canvas id="bg-canvas"></canvas>
+  <main id="main-content" class="main-content hidden">
 
-    <!-- Music Player (Fixed) -->
-    <div id="music-player">
-      <button id="btn-music" class="btn-music">
-        <svg id="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        <svg id="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-      </button>
-      <span class="music-label">♪ Music</span>
-    </div>
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="floating-nav" id="floating-nav">
+      <div class="nav-items">
+        <a href="#hero" class="nav-item active" data-section="hero">
+          <i class="fas fa-heart"></i>
+          <span>Home</span>
+        </a>
+        <a href="#couple" class="nav-item" data-section="couple">
+          <i class="fas fa-users"></i>
+          <span>Mempelai</span>
+        </a>
+        <a href="#event" class="nav-item" data-section="event">
+          <i class="fas fa-calendar"></i>
+          <span>Acara</span>
+        </a>
+        <a href="#gallery" class="nav-item" data-section="gallery">
+          <i class="fas fa-image"></i>
+          <span>Galeri</span>
+        </a>
+        <a href="#rsvp" class="nav-item" data-section="rsvp">
+          <i class="fas fa-check-circle"></i>
+          <span>RSVP</span>
+        </a>
+      </div>
+    </nav>
 
-    <!-- ===== HERO / NAMA MEMPELAI ===== -->
-    <section id="hero" class="section">
+    <!-- Music Control -->
+    <button class="music-control" id="music-control">
+      <i class="fas fa-music"></i>
+      <div class="music-bars">
+        <span></span><span></span><span></span>
+      </div>
+    </button>
+
+    <!-- ===== HERO / BISMILLAH ===== -->
+    <section id="hero" class="section section-hero">
       <div class="section-inner">
-        <div class="ornament-top">✦</div>
-        <p class="section-subtitle">The Wedding Celebration of</p>
-        <h1 class="couple-names">
-          <span class="name-groom">Ahmad Fauzi</span>
-          <span class="ampersand">&</span>
-          <span class="name-bride">Siti Nurhaliza</span>
-        </h1>
-        <p class="wedding-date">Minggu, 20 Desember 2026</p>
-        <div class="ornament-bottom">✦</div>
+        <div class="hero-ornament">
+          <i class="fas fa-star"></i>
+        </div>
+        <h2 class="section-subtitle">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</h2>
+        <div class="hero-names">
+          <span class="letter letter-p">P</span>
+          <span class="letter letter-a">A</span>
+        </div>
+        <div class="hero-verse">
+          <p>"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."</p>
+          <cite>Q.S Ar-Rum : 21</cite>
+        </div>
       </div>
     </section>
 
-    <!-- ===== FOTO PASANGAN ===== -->
-    <section id="couple" class="section">
+    <!-- ===== BRIDE & GROOM ===== -->
+    <section id="couple" class="section section-couple">
       <div class="section-inner">
-        <h2 class="section-title">Mempelai</h2>
-        <div class="couple-grid">
-          <div class="couple-card glass-card">
-            <div class="photo-frame">
-              <img src="assets/images/groom.jpg" alt="Mempelai Pria" class="couple-photo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23f5e6d3%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22105%22 text-anchor=%22middle%22 font-size=%2240%22>🤵</text></svg>'">
-            </div>
-            <h3>Ahmad Fauzi</h3>
-            <p class="parent-names">Putra dari Bpk. H. Abdul Rahman & Ibu Hj. Fatimah</p>
-            <p class="couple-quote">"Allah menciptakanmu untukku"</p>
+        <div class="section-header">
+          <span class="section-label">Bride & Groom</span>
+          <h2 class="section-title">Mempelai</h2>
+          <div class="title-ornament">
+            <span class="ornament-line"></span>
+            <i class="fas fa-heart"></i>
+            <span class="ornament-line"></span>
           </div>
-          <div class="couple-heart">💕</div>
-          <div class="couple-card glass-card">
-            <div class="photo-frame">
-              <img src="assets/images/bride.jpg" alt="Mempelai Wanita" class="couple-photo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23f5e6d3%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22105%22 text-anchor=%22middle%22 font-size=%2240%22>👰</text></svg>'">
+        </div>
+        
+        <div class="couple-intro">
+          <p>Assalamu'alaikum Warahmatullahi Wabarakatuh</p>
+          <p>Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Ya Allah semoga ridho-Mu tercurah mengiringi pernikahan kami.</p>
+        </div>
+
+        <div class="couple-profiles">
+          <!-- Bride -->
+          <div class="profile-card">
+            <div class="profile-photo-wrapper">
+              <div class="photo-frame">
+                <img src="assets/images/bride.jpg" alt="Putri" class="profile-photo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 300%22><rect fill=%22%23f8f4ef%22 width=%22300%22 height=%22300%22/><text x=%22150%22 y=%22160%22 text-anchor=%22middle%22 font-size=%2260%22>👰</text></svg>'">
+              </div>
+              <div class="photo-decoration"></div>
             </div>
-            <h3>Siti Nurhaliza</h3>
-            <p class="parent-names">Putri dari Bpk. H. Ismail & Ibu Hj. Khadijah</p>
-            <p class="couple-quote">"Kau adalah jawaban doaku"</p>
+            <h3 class="profile-nickname">Putri</h3>
+            <h4 class="profile-fullname">Putri Cantika Sari</h4>
+            <p class="profile-parent">Putri Pertama dari</p>
+            <p class="profile-parents">Bapak Abdul Rozak dan Ibu Adelia Marni</p>
+            <a href="#" class="profile-ig">
+              <i class="fab fa-instagram"></i>
+              <span>@putricantika</span>
+            </a>
+          </div>
+
+          <!-- Separator -->
+          <div class="couple-separator">
+            <div class="separator-line"></div>
+            <div class="separator-heart">
+              <i class="fas fa-heart"></i>
+            </div>
+            <div class="separator-line"></div>
+          </div>
+
+          <!-- Groom -->
+          <div class="profile-card">
+            <div class="profile-photo-wrapper">
+              <div class="photo-frame">
+                <img src="assets/images/groom.jpg" alt="Andika" class="profile-photo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 300%22><rect fill=%22%23f8f4ef%22 width=%22300%22 height=%22300%22/><text x=%22150%22 y=%22160%22 text-anchor=%22middle%22 font-size=%2260%22>🤵</text></svg>'">
+              </div>
+              <div class="photo-decoration"></div>
+            </div>
+            <h3 class="profile-nickname">Andika</h3>
+            <h4 class="profile-fullname">Putra Andika Pratama</h4>
+            <p class="profile-parent">Putra Pertama dari</p>
+            <p class="profile-parents">Bapak Deni Bastian dan Ibu Aisha Dania</p>
+            <a href="#" class="profile-ig">
+              <i class="fab fa-instagram"></i>
+              <span>@andikapratama</span>
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===== TANGGAL & WAKTU ===== -->
-    <section id="event" class="section">
+    <!-- ===== SAVE THE DATE / COUNTDOWN ===== -->
+    <section id="countdown" class="section section-countdown">
+      <div class="countdown-bg">
+        <div class="countdown-pattern"></div>
+      </div>
       <div class="section-inner">
-        <h2 class="section-title">Waktu & Tempat</h2>
-        <div class="event-grid">
+        <div class="section-header">
+          <span class="section-label">Save The Date</span>
+          <h2 class="section-title">Hitung Mundur</h2>
+        </div>
+        
+        <div class="countdown-grid">
+          <div class="countdown-item">
+            <div class="countdown-number" id="cd-days">0</div>
+            <div class="countdown-label">Hari</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="cd-hours">0</div>
+            <div class="countdown-label">Jam</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="cd-minutes">0</div>
+            <div class="countdown-label">Menit</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="cd-seconds">0</div>
+            <div class="countdown-label">Detik</div>
+          </div>
+        </div>
+        
+        <button class="btn-save-date" id="btn-save-date">
+          <i class="fas fa-calendar-plus"></i>
+          <span>Simpan Tanggal</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ===== EVENT DETAILS ===== -->
+    <section id="event" class="section section-event">
+      <div class="section-inner">
+        <div class="event-cards">
           <!-- Akad Nikah -->
-          <div class="event-card glass-card">
-            <div class="event-icon">🕌</div>
-            <h3>Akad Nikah</h3>
-            <div class="event-detail">
-              <p><strong>📅 Minggu, 20 Desember 2026</strong></p>
-              <p>🕐 08:00 - 10:00 WIB</p>
-              <p>📍 Masjid Al-Ikhlas</p>
+          <div class="event-card">
+            <div class="event-icon">
+              <i class="fas fa-mosque"></i>
+            </div>
+            <h3 class="event-title">Akad Nikah</h3>
+            <div class="event-day">Minggu</div>
+            <div class="event-date-big">28</div>
+            <div class="event-month-year">
+              <span>Desember</span>
+              <span class="event-dot">•</span>
+              <span>2026</span>
+            </div>
+            <div class="event-time">
+              <i class="fas fa-clock"></i>
+              <span>08:00 - 10:00 WIB</span>
+            </div>
+            <div class="event-location">
+              <h4><i class="fas fa-map-marker-alt"></i> Lokasi Acara</h4>
+              <p>Masjid Al-Ikhlas</p>
               <p>Jl. Merdeka No. 123, Jakarta Selatan</p>
             </div>
             <a href="https://maps.google.com/?q=Masjid+Al+Ikhlas+Jakarta" target="_blank" class="btn-maps">
-              📍 Buka Google Maps
+              <i class="fas fa-map-marked-alt"></i>
+              <span>Google Maps</span>
             </a>
           </div>
+
           <!-- Resepsi -->
-          <div class="event-card glass-card">
-            <div class="event-icon">🎉</div>
-            <h3>Resepsi</h3>
-            <div class="event-detail">
-              <p><strong>📅 Minggu, 20 Desember 2026</strong></p>
-              <p>🕐 11:00 - 14:00 WIB</p>
-              <p>📍 Ballroom Hotel Grand Sahid</p>
+          <div class="event-card">
+            <div class="event-icon">
+              <i class="fas fa-glass-cheers"></i>
+            </div>
+            <h3 class="event-title">Resepsi</h3>
+            <div class="event-day">Minggu</div>
+            <div class="event-date-big">28</div>
+            <div class="event-month-year">
+              <span>Desember</span>
+              <span class="event-dot">•</span>
+              <span>2026</span>
+            </div>
+            <div class="event-time">
+              <i class="fas fa-clock"></i>
+              <span>11:00 - 14:00 WIB</span>
+            </div>
+            <div class="event-location">
+              <h4><i class="fas fa-map-marker-alt"></i> Lokasi Acara</h4>
+              <p>Ballroom Hotel Grand Sahid</p>
               <p>Jl. Jend. Sudirman Kav. 86, Jakarta</p>
             </div>
             <a href="https://maps.google.com/?q=Grand+Sahid+Hotel+Jakarta" target="_blank" class="btn-maps">
-              📍 Buka Google Maps
+              <i class="fas fa-map-marked-alt"></i>
+              <span>Google Maps</span>
             </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===== COUNTDOWN ===== -->
-    <section id="countdown" class="section">
+    <!-- ===== DRESSCODE ===== -->
+    <section id="dresscode" class="section section-dresscode">
       <div class="section-inner">
-        <h2 class="section-title">Menuju Hari Bahagia</h2>
-        <div class="countdown-grid">
-          <div class="countdown-item glass-card">
-            <span id="cd-days" class="countdown-num">0</span>
-            <span class="countdown-label">Hari</span>
+        <div class="section-header">
+          <span class="section-label">Dresscode</span>
+          <h2 class="section-title">Pakaian</h2>
+        </div>
+        <p class="dresscode-desc">Kami dengan hormat menganjurkan tamu kami untuk mengenakan warna-warna ini untuk hari istimewa kami.</p>
+        <div class="dresscode-colors">
+          <div class="color-item">
+            <div class="color-circle" style="background: #2C3E50;"></div>
+            <span>Navy</span>
           </div>
-          <div class="countdown-item glass-card">
-            <span id="cd-hours" class="countdown-num">0</span>
-            <span class="countdown-label">Jam</span>
+          <div class="color-item">
+            <div class="color-circle" style="background: #8E7C68;"></div>
+            <span>Khaki</span>
           </div>
-          <div class="countdown-item glass-card">
-            <span id="cd-minutes" class="countdown-num">0</span>
-            <span class="countdown-label">Menit</span>
+          <div class="color-item">
+            <div class="color-circle" style="background: #D4AF37;"></div>
+            <span>Gold</span>
           </div>
-          <div class="countdown-item glass-card">
-            <span id="cd-seconds" class="countdown-num">0</span>
-            <span class="countdown-label">Detik</span>
+          <div class="color-item">
+            <div class="color-circle" style="background: #F5F0E8;"></div>
+            <span>Cream</span>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ===== LOVE STORY ===== -->
-    <section id="lovestory" class="section">
+    <section id="lovestory" class="section section-lovestory">
       <div class="section-inner">
-        <h2 class="section-title">Cerita Cinta Kami</h2>
+        <div class="section-header">
+          <span class="section-label">Love Story</span>
+          <h2 class="section-title">Cerita Cinta</h2>
+          <div class="title-ornament">
+            <span class="ornament-line"></span>
+            <i class="fas fa-heart"></i>
+            <span class="ornament-line"></span>
+          </div>
+        </div>
+
         <div class="timeline">
-          <div class="timeline-item glass-card">
-            <div class="timeline-dot">💫</div>
-            <div class="timeline-content">
-              <h3>Pertama Bertemu</h3>
-              <p class="timeline-date">Januari 2020</p>
-              <p>Kami pertama kali bertemu di sebuah acara seminar di kampus. Tatapan pertama yang tak terlupakan.</p>
+          <div class="timeline-line"></div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot">
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="timeline-card">
+              <div class="timeline-date">25 Agustus 2023</div>
+              <h3 class="timeline-title">Pertama Bertemu</h3>
+              <p class="timeline-desc">Berawal dari tempat pekerjaan di Cianjur, kami mengenal satu sama lain dan belum ada benih cinta kala itu, hanya sebatas teman kerja.</p>
             </div>
           </div>
-          <div class="timeline-item glass-card">
-            <div class="timeline-dot">☕</div>
-            <div class="timeline-content">
-              <h3>Kencan Pertama</h3>
-              <p class="timeline-date">Maret 2020</p>
-              <p>Setelah berbulan-bulan berkomunikasi, kami memutuskan untuk kopi darat di kafe kecil dekat kampus.</p>
+
+          <div class="timeline-item">
+            <div class="timeline-dot">
+              <i class="fas fa-heart"></i>
+            </div>
+            <div class="timeline-card">
+              <div class="timeline-date">03 Juni 2024</div>
+              <h3 class="timeline-title">Hubungan Serius</h3>
+              <p class="timeline-desc">Setelah cukup mengenal satu sama lain, satu tahun kurang lebihnya kami menjalin hubungan. Akhirnya kita memutuskan untuk melanjutkan ke hubungan yang lebih serius mempertemukan kedua keluarga.</p>
             </div>
           </div>
-          <div class="timeline-item glass-card">
-            <div class="timeline-dot">💍</div>
-            <div class="timeline-content">
-              <h3>Lamaran</h3>
-              <p class="timeline-date">Juni 2026</p>
-              <p>Dengan restu kedua orang tua, Ahmad melamar Siti di taman bunga yang indah saat matahari terbenam.</p>
+
+          <div class="timeline-item">
+            <div class="timeline-dot">
+              <i class="fas fa-ring"></i>
             </div>
-          </div>
-          <div class="timeline-item glass-card">
-            <div class="timeline-dot">💒</div>
-            <div class="timeline-content">
-              <h3>Pernikahan</h3>
-              <p class="timeline-date">Desember 2026</p>
-              <p>Alhamdulillah, hari yang kami nantikan akan segera tiba. Kami mengundang Anda untuk menjadi saksi.</p>
+            <div class="timeline-card">
+              <div class="timeline-date">29 Desember 2025</div>
+              <h3 class="timeline-title">Akad Nikah</h3>
+              <p class="timeline-desc">Sampai tanggal ini kami melaksanakan akad terlebih dahulu dan akhirnya kami mengubah status hingga menjadi pasangan suami istri. Semoga Allah SWT memberikan keberkahan pernikahan ini. Aamiin.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===== GALERI FOTO ===== -->
-    <section id="gallery" class="section">
+    <!-- ===== OUR MOMENTS / GALLERY ===== -->
+    <section id="gallery" class="section section-gallery">
       <div class="section-inner">
-        <h2 class="section-title">Galeri Foto</h2>
-        <div class="carousel-container">
-          <div class="carousel-track" id="carousel-track">
-            <div class="carousel-slide"><img src="assets/images/gallery1.jpg" alt="Foto 1" onerror="this.parentElement.innerHTML='<div class=placeholder-photo'>📸 Foto 1</div>'"></div>
-            <div class="carousel-slide"><img src="assets/images/gallery2.jpg" alt="Foto 2" onerror="this.parentElement.innerHTML='<div class=placeholder-photo'>📸 Foto 2</div>'"></div>
-            <div class="carousel-slide"><img src="assets/images/gallery3.jpg" alt="Foto 3" onerror="this.parentElement.innerHTML='<div class=placeholder-photo'>📸 Foto 3</div>'"></div>
-            <div class="carousel-slide"><img src="assets/images/gallery4.jpg" alt="Foto 4" onerror="this.parentElement.innerHTML='<div class=placeholder-photo'>📸 Foto 4</div>'"></div>
-            <div class="carousel-slide"><img src="assets/images/gallery5.jpg" alt="Foto 5" onerror="this.parentElement.innerHTML='<div class=placeholder-photo'>📸 Foto 5</div>'"></div>
-            <div class="carousel-slide"><img src="assets/images/gallery6.jpg" alt="Foto 6" onerror="this.parentElement.innerHTML='<div class=placeholder-photo'>📸 Foto 6</div>'"></div>
+        <div class="section-header">
+          <span class="section-label">Our Moments</span>
+          <h2 class="section-title">Galeri Foto</h2>
+          <div class="title-ornament">
+            <span class="ornament-line"></span>
+            <i class="fas fa-heart"></i>
+            <span class="ornament-line"></span>
           </div>
-          <button class="carousel-btn carousel-prev" id="carousel-prev">❮</button>
-          <button class="carousel-btn carousel-next" id="carousel-next">❯</button>
-          <div class="carousel-dots" id="carousel-dots"></div>
+        </div>
+
+        <div class="swiper gallery-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="assets/images/gallery1.jpg" alt="Moment 1" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23f0ebe3%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2250%22>💑</text></svg>'">
+            </div>
+            <div class="swiper-slide">
+              <img src="assets/images/gallery2.jpg" alt="Moment 2" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23f0ebe3%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2250%22>🌹</text></svg>'">
+            </div>
+            <div class="swiper-slide">
+              <img src="assets/images/gallery3.jpg" alt="Moment 3" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23f0ebe3%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2250%22>💍</text></svg>'">
+            </div>
+            <div class="swiper-slide">
+              <img src="assets/images/gallery4.jpg" alt="Moment 4" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23f0ebe3%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2250%22>📸</text></svg>'">
+            </div>
+            <div class="swiper-slide">
+              <img src="assets/images/gallery5.jpg" alt="Moment 5" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23f0ebe3%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2250%22>💕</text></svg>'">
+            </div>
+            <div class="swiper-slide">
+              <img src="assets/images/gallery6.jpg" alt="Moment 6" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23f0ebe3%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2250%22>💒</text></svg>'">
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
         </div>
       </div>
     </section>
 
-    <!-- ===== BUKU TAMU & UCAPAN ===== -->
-    <section id="guestbook" class="section">
+    <!-- ===== WEDDING GIFT ===== -->
+    <section id="gift" class="section section-gift">
       <div class="section-inner">
-        <h2 class="section-title">Buku Tamu & Ucapan</h2>
-        <div class="guestbook-form glass-card">
-          <form id="form-ucapan">
-            <div class="form-group">
-              <input type="text" id="gb-name" placeholder="Nama Anda" required>
+        <div class="section-header">
+          <span class="section-label">Wedding Gift</span>
+          <h2 class="section-title">Kado</h2>
+          <div class="title-ornament">
+            <span class="ornament-line"></span>
+            <i class="fas fa-gift"></i>
+            <span class="ornament-line"></span>
+          </div>
+        </div>
+        <p class="gift-desc">Tanpa mengurangi rasa hormat, bagi Anda yang ingin memberikan tanda kasih untuk mempelai, dapat mengirimkannya melalui:</p>
+        
+        <div class="gift-cards">
+          <div class="gift-card">
+            <div class="gift-icon">
+              <i class="fas fa-university"></i>
+            </div>
+            <h4>Bank Transfer</h4>
+            <p class="gift-bank">BCA</p>
+            <p class="gift-number">1234567890</p>
+            <p class="gift-name">a.n Putri Cantika Sari</p>
+            <button class="btn-copy" onclick="copyText('1234567890')">
+              <i class="fas fa-copy"></i> Salin
+            </button>
+          </div>
+          <div class="gift-card">
+            <div class="gift-icon">
+              <i class="fas fa-wallet"></i>
+            </div>
+            <h4>E-Wallet</h4>
+            <p class="gift-bank">GoPay / OVO</p>
+            <p class="gift-number">081234567890</p>
+            <p class="gift-name">a.n Putri Cantika Sari</p>
+            <button class="btn-copy" onclick="copyText('081234567890')">
+              <i class="fas fa-copy"></i> Salin
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WISHES / GUESTBOOK ===== -->
+    <section id="rsvp" class="section section-wishes">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Wishes</span>
+          <h2 class="section-title">Ucapan & Doa</h2>
+          <div class="title-ornament">
+            <span class="ornament-line"></span>
+            <i class="fas fa-heart"></i>
+            <span class="ornament-line"></span>
+          </div>
+        </div>
+
+        <div class="wishes-form">
+          <form id="form-wishes">
+            <div class="form-row">
+              <div class="form-group">
+                <input type="text" id="wish-name" placeholder="Nama Anda" required>
+              </div>
+              <div class="form-group">
+                <select id="wish-attendance" required>
+                  <option value="" disabled selected>Konfirmasi Kehadiran</option>
+                  <option value="hadir">Akan Hadir ✅</option>
+                  <option value="tidak">Tidak Bisa Hadir ❌</option>
+                  <option value="ragu">Masih Ragu 🤔</option>
+                </select>
+              </div>
             </div>
             <div class="form-group">
-              <select id="gb-attendance" required>
-                <option value="" disabled selected>Konfirmasi Kehadiran</option>
-                <option value="hadir">✅ Akan Hadir</option>
-                <option value="tidak">❌ Tidak Bisa Hadir</option>
-                <option value="ragu">🤔 Masih Ragu</option>
-              </select>
+              <textarea id="wish-message" placeholder="Tulis ucapan & doa untuk kedua mempelai..." rows="3" required></textarea>
             </div>
-            <div class="form-group">
-              <textarea id="gb-message" placeholder="Tulis ucapan & doa untuk kedua mempelai..." rows="4" required></textarea>
-            </div>
-            <button type="submit" class="btn-golden">💌 Kirim Ucapan</button>
+            <button type="submit" class="btn-submit">
+              <i class="fas fa-paper-plane"></i>
+              <span>Kirim Ucapan</span>
+            </button>
           </form>
         </div>
-        <div class="guestbook-list" id="guestbook-list">
-          <!-- Ucapan akan muncul di sini -->
+
+        <div class="wishes-list" id="wishes-list">
+          <!-- Wishes will be loaded here -->
         </div>
       </div>
     </section>
 
-    <!-- ===== RSVP ===== -->
-    <section id="rsvp" class="section">
+    <!-- ===== THANK YOU ===== -->
+    <section id="closing" class="section section-closing">
+      <div class="closing-bg">
+        <div class="floating-petals" id="closing-petals"></div>
+      </div>
       <div class="section-inner">
-        <h2 class="section-title">RSVP</h2>
-        <div class="rsvp-card glass-card">
-          <p class="rsvp-text">Mohon konfirmasi kehadiran Anda sebelum <strong>10 Desember 2026</strong></p>
-          <div class="rsvp-buttons">
-            <button class="btn-rsvp btn-hadir" onclick="submitRSVP('hadir')">✅ Akan Hadir</button>
-            <button class="btn-rsvp btn-tidak" onclick="submitRSVP('tidak')">❌ Tidak Hadir</button>
+        <div class="closing-frame">
+          <div class="frame-corner top-left"></div>
+          <div class="frame-corner top-right"></div>
+          <div class="frame-corner bottom-left"></div>
+          <div class="frame-corner bottom-right"></div>
+          
+          <h2 class="closing-names">Putri & Andika</h2>
+          <p class="closing-thanks">Merupakan suatu kebahagiaan dan kehormatan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kami.</p>
+          <p class="closing-wassalam">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
+          
+          <div class="closing-divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon"><i class="fas fa-heart"></i></span>
+            <span class="divider-line"></span>
           </div>
-          <p id="rsvp-thanks" class="rsvp-thanks hidden">Terima kasih atas konfirmasinya! 🙏</p>
+          
+          <p class="closing-brand">HUBUNGI KAMI</p>
+          <div class="closing-social">
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ===== CLOSING ===== -->
-    <section id="closing" class="section">
-      <div class="section-inner">
-        <div class="ornament-top">✦</div>
-        <p class="closing-quote">"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."</p>
-        <p class="closing-verse">— QS. Ar-Rum: 21 —</p>
-        <h2 class="closing-names">Ahmad & Siti</h2>
-        <p class="closing-thanks">Merupakan suatu kebahagiaan dan kehormatan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kami.</p>
-        <p class="closing-wassalam">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
-        <div class="ornament-bottom">✦</div>
-      </div>
-    </section>
-
-    <!-- ===== FOOTER ===== -->
+    <!-- Footer -->
     <footer class="footer">
-      <p>Made with ❤️ | Ahmad & Siti © 2026</p>
+      <p>Made with ❤️</p>
     </footer>
 
     <!-- Scroll to Top -->
-    <button id="btn-scroll-top" class="btn-scroll-top hidden">↑</button>
-  </div>
+    <button class="btn-scroll-top" id="btn-scroll-top">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+  </main>
 
   <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="js/intro3d.js"></script>
-  <script src="js/scene3d.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
